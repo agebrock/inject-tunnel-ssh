@@ -33,11 +33,16 @@ For some we now need a tunnel to connect to the server..
     var db = require('mongojs')('tunneltest1.com/test');
     db.test.findOne(console.log);
 ```
-
-
 ## How it works
 The injector is a module wrapping the native node "net.connection" function to inject 
 the tunnel configuration. 
+
+
+
+## Configuration
+You can use the same properties as you would use in tunnel-ssh but in form of an array, since you can 
+setup as many host / port combinations as you want. If no localPort is provided, the injector will search 
+for a free one.
 For more information about the configuration please refer to the [tunnel-ssh](https://github.com/Finanzchef24-GmbH/tunnel-ssh) package.
 
 
