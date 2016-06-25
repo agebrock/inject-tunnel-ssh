@@ -1,6 +1,6 @@
 {
   "name": "inject-tunnel-ssh",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Integrate tunnel-ssh without wrapping your existing codebase",
   "homepage": "http://agebrock.com",
   "author": {
