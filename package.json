@@ -45,6 +45,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "3.4.1"
+    "bluebird": "3.4.1",
+    "tunnel-ssh": "^4.0.0"
   }
 }
