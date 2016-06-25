@@ -1,4 +1,4 @@
-# inject-tunnel-ssh [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# inject-tunnel-ssh [![NPM version][npm-image]][npm-url]  [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > Integrate tunnel-ssh without wrapping your existing codebase
 
 ## Installation
@@ -6,32 +6,46 @@
 ```sh
 $ npm install --save inject-tunnel-ssh
 ```
-
 ## Motivation and usage
 The injector was build to support almost zero changes to your existing codebase. 
+
+## Example
+
+In the following example explains the integration (well injection) 
+based on a little mongojs app.. 
+
+```js
+var db = require('mongojs')('tunneltest1.com/test');
+db.test.findOne(console.log);
+```
+For some we now need a tunnel to connect to the server..
+
+```js
+  
+    // ---- START INTEGRATION CODE -----
+    require('inject-tunnel-ssh')([{
+          dstPort: 27017,
+          host: 'tunneltest1.com',
+          username: 'root'
+      }]).on('error',console.log);
+    // ---- END INTEGRATION CODE -----
+      
+    var db = require('mongojs')('tunneltest1.com/test');
+    db.test.findOne(console.log);
+```
+
 
 ## How it works
 The injector is a module wrapping the native node "net.connection" function to inject 
 the tunnel configuration. 
-
-## Usage
 For more information about the configuration please refer to the [tunnel-ssh](https://github.com/Finanzchef24-GmbH/tunnel-ssh) package.
 
-```js
-  
-  var its = require('inject-tunnel-ssh');
-  
-  its([{
-      dstPort: 27017,
-      host: 'tunneltest1.com',
-      username: 'root'
-  }, {
-      dstPort: 27017,
-      host: 'tunneltest2.com',
-      username: 'root'
-  }]).on('error',console.log);
 
-```
+
+If you get stuck using the lib please raise an issue or wait until we 
+write a better readme.. ;) 
+
+
 ## License
 
 MIT © [Christoph Hagenbrock](agebrock.com)
