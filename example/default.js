@@ -1,5 +1,7 @@
 'use strict';
+
 var tinject = require('../lib');
+
 tinject([{
     dstPort: 27017,
     host: 'tunneltest1.com',
@@ -11,15 +13,13 @@ tinject([{
 }]);
 
 
-function create(target) {
-    return function runsrv() {
-        var srv = require('mongojs')(target);
-        srv.forms.findOne({}, function() {
-            srv.close();
-        });
-        srv.on('close', runsrv);
-    }
-}
-create('tunneltest2.com/fc24')();
+var srv = require('mongojs')('tunneltest1.com/somedb');
+srv.forms.findOne({}, function() {
+    srv.close();
+});
 
-create('tunneltest1.com/fc24')();
+
+var srv2 = require('mongojs')('tunneltest2.com/somedb');
+srv2.someCollection.findOne({}, function() {
+    srv2.close();
+});
