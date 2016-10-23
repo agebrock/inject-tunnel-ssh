@@ -1,15 +1,17 @@
 'use strict';
-var injectTunnelSsh = require('../lib');
+var portscan = require('../lib/port');
 var ts = require('proxy-sinon-chai');
 var expect = ts.expect;
 
 describe('inject-tunnel-ssh', function() {
-    var context;
 
     beforeEach(() => {
     });
 
-    it('should have unit test!', function() {
-        assert(false, 'we expected this package author to add actual unit tests.');
+    it('should return a port number', function(done) {
+        portscan(8080, function(error, port){
+           expect(port).to.be.at.least(8080);
+           done();
+        });
     });
 });
